@@ -1,4 +1,47 @@
-<!DOCTYPE html>
+#!/usr/bin/env python3
+"""Regenerate blog/index.html and sitemap.xml based on scheduled publish dates.
+
+Reads blog/posts.json, filters to posts where date <= today (AEST),
+and writes the blog index and sitemap with only published posts.
+"""
+
+import json
+import os
+from datetime import datetime, timezone, timedelta
+
+# AEST = UTC+11 (during daylight saving) / UTC+10 (standard)
+# Use UTC+11 to be safe — posts go live slightly earlier rather than later
+AEST = timezone(timedelta(hours=11))
+
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+ROOT_DIR = os.path.dirname(SCRIPT_DIR)
+POSTS_JSON = os.path.join(ROOT_DIR, "blog", "posts.json")
+INDEX_HTML = os.path.join(ROOT_DIR, "blog", "index.html")
+SITEMAP_XML = os.path.join(ROOT_DIR, "sitemap.xml")
+
+
+def format_date(iso_date: str) -> str:
+    """Convert 2026-03-02 to '2 March 2026'."""
+    d = datetime.strptime(iso_date, "%Y-%m-%d")
+    return f"{d.day} {d.strftime('%B')} {d.year}"
+
+
+def build_card(post: dict) -> str:
+    return f"""
+          <a href="/blog/{post['slug']}" class="blog-card">
+            <img src="../assets/images/blog/{post['slug']}.png" alt="{post['alt']}" class="blog-card__image" loading="lazy" width="600" height="315">
+            <div class="blog-card__body">
+              <p class="blog-card__date">{format_date(post['date'])}</p>
+              <h2 class="blog-card__title">{post['title']}</h2>
+              <p class="blog-card__excerpt">{post['excerpt']}</p>
+              <span class="blog-card__link">Read More &rarr;</span>
+            </div>
+          </a>"""
+
+
+def build_index(published_posts: list) -> str:
+    cards = "\n".join(build_card(p) for p in published_posts)
+    return f"""<!DOCTYPE html>
 <html lang="en-AU">
 <head>
   <meta charset="UTF-8">
@@ -66,46 +109,7 @@
     <section class="blog-list" aria-label="Blog posts">
       <div class="container">
         <div class="blog-list__grid">
-
-          <a href="/blog/laundromat-etiquette" class="blog-card">
-            <img src="../assets/images/blog/laundromat-etiquette.png" alt="Laundromat etiquette guide" class="blog-card__image" loading="lazy" width="600" height="315">
-            <div class="blog-card__body">
-              <p class="blog-card__date">2 March 2026</p>
-              <h2 class="blog-card__title">The Ultimate Laundromat Etiquette Guide</h2>
-              <p class="blog-card__excerpt">Be the laundromat neighbour everyone loves. Our friendly guide to the unwritten rules of shared laundry spaces.</p>
-              <span class="blog-card__link">Read More &rarr;</span>
-            </div>
-          </a>
-
-          <a href="/blog/laundromat-vs-home-washing" class="blog-card">
-            <img src="../assets/images/blog/laundromat-vs-home-washing.png" alt="Laundromat vs washing at home comparison" class="blog-card__image" loading="lazy" width="600" height="315">
-            <div class="blog-card__body">
-              <p class="blog-card__date">2 March 2026</p>
-              <h2 class="blog-card__title">Laundromat vs Washing at Home</h2>
-              <p class="blog-card__excerpt">When does a laundromat make more sense than washing at home? From share houses to bulky items, here's the honest comparison.</p>
-              <span class="blog-card__link">Read More &rarr;</span>
-            </div>
-          </a>
-
-          <a href="/blog/self-service-laundromats-melbourne" class="blog-card">
-            <img src="../assets/images/blog/self-service-laundromats-melbourne.png" alt="Self-service laundromats in Melbourne" class="blog-card__image" loading="lazy" width="600" height="315">
-            <div class="blog-card__body">
-              <p class="blog-card__date">2 March 2026</p>
-              <h2 class="blog-card__title">Self-Service Laundromats in Melbourne: What to Know</h2>
-              <p class="blog-card__excerpt">First time at a laundromat? Here's everything you need to know — what to bring, how it works, and what to expect in Melbourne.</p>
-              <span class="blog-card__link">Read More &rarr;</span>
-            </div>
-          </a>
-
-          <a href="/blog/how-to-wash-a-doona" class="blog-card">
-            <img src="../assets/images/blog/how-to-wash-a-doona.png" alt="How to wash a doona at a laundromat" class="blog-card__image" loading="lazy" width="600" height="315">
-            <div class="blog-card__body">
-              <p class="blog-card__date">2 March 2026</p>
-              <h2 class="blog-card__title">How to Wash a Doona at a Laundromat</h2>
-              <p class="blog-card__excerpt">Your home machine can't fit a doona — but our 27KG washers can. Here's the step-by-step guide to getting your doona fresh and clean.</p>
-              <span class="blog-card__link">Read More &rarr;</span>
-            </div>
-          </a>
+{cards}
 
         </div>
       </div>
@@ -154,4 +158,72 @@
 
   <script src="../js/main.js?v=3"></script>
 </body>
-</html>
+</html>"""
+
+
+def build_sitemap(published_posts: list) -> str:
+    static_pages = [
+        ("https://laundryday.au/", "2026-03-02", "weekly", "1.0"),
+        ("https://laundryday.au/brunswick-east", "2026-03-02", "weekly", "0.9"),
+        ("https://laundryday.au/st-albans", "2026-03-02", "weekly", "0.9"),
+        ("https://laundryday.au/maribyrnong", "2026-03-02", "weekly", "0.9"),
+        ("https://laundryday.au/blog", "2026-03-02", "weekly", "0.8"),
+    ]
+
+    urls = []
+    for loc, lastmod, freq, priority in static_pages:
+        urls.append(f"""  <url>
+    <loc>{loc}</loc>
+    <lastmod>{lastmod}</lastmod>
+    <changefreq>{freq}</changefreq>
+    <priority>{priority}</priority>
+  </url>""")
+
+    for post in published_posts:
+        urls.append(f"""  <url>
+    <loc>https://laundryday.au/blog/{post['slug']}</loc>
+    <lastmod>{post['date']}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>""")
+
+    urls.append("""  <url>
+    <loc>https://laundryday.au/privacy.html</loc>
+    <lastmod>2026-03-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+  </url>""")
+
+    return f"""<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{"".join(chr(10) + u for u in urls)}
+</urlset>
+"""
+
+
+def main():
+    today = datetime.now(AEST).date()
+    print(f"Today (AEST): {today}")
+
+    with open(POSTS_JSON) as f:
+        all_posts = json.load(f)
+
+    published = [
+        p for p in all_posts
+        if datetime.strptime(p["date"], "%Y-%m-%d").date() <= today
+    ]
+    print(f"Published: {len(published)} / {len(all_posts)} posts")
+
+    index_html = build_index(published)
+    with open(INDEX_HTML, "w") as f:
+        f.write(index_html)
+    print(f"Wrote {INDEX_HTML}")
+
+    sitemap_xml = build_sitemap(published)
+    with open(SITEMAP_XML, "w") as f:
+        f.write(sitemap_xml)
+    print(f"Wrote {SITEMAP_XML}")
+
+
+if __name__ == "__main__":
+    main()
