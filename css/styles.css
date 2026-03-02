@@ -1314,7 +1314,305 @@ h1, h2, h3, h4 {
 }
 
 /* ===========================
-   16. SCROLL ANIMATIONS
+   17. LOCATION PAGES
+   =========================== */
+
+/* Location Hero */
+.loc-hero {
+  position: relative;
+  min-height: 50vh;
+  display: flex;
+  align-items: flex-end;
+  padding-top: 72px;
+  overflow: hidden;
+}
+
+.loc-hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.loc-hero__bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.loc-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(13, 71, 161, 0.95) 0%,
+    rgba(13, 71, 161, 0.7) 40%,
+    rgba(21, 101, 192, 0.4) 100%
+  );
+}
+
+.loc-hero__content {
+  position: relative;
+  z-index: 1;
+  padding: var(--space-lg) 0 var(--space-md);
+}
+
+.loc-hero__breadcrumb {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: var(--space-sm);
+}
+
+.loc-hero__breadcrumb a {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.loc-hero__breadcrumb a:hover {
+  color: var(--color-white);
+}
+
+.loc-hero__breadcrumb span:not(:last-child) {
+  margin: 0 0.375rem;
+}
+
+.loc-hero__heading {
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 800;
+  color: var(--color-white);
+  line-height: 1.1;
+  margin-bottom: var(--space-xs);
+}
+
+.loc-hero__heading-accent {
+  color: var(--color-pink-light);
+}
+
+.loc-hero__address {
+  font-size: 1.125rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: var(--space-xs);
+}
+
+.loc-hero__status {
+  margin-top: var(--space-xs);
+}
+
+.loc-hero__badge {
+  display: inline-block;
+  background: var(--color-pink);
+  color: var(--color-white);
+  font-family: var(--font-heading);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Location Details */
+.loc-details {
+  padding: var(--space-xl) 0 var(--space-lg);
+  background: var(--color-white);
+}
+
+.loc-details__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.loc-details__main {
+  min-width: 0;
+}
+
+.loc-details__intro p {
+  font-size: 1.0625rem;
+  color: var(--color-text-body);
+  line-height: 1.7;
+  margin-bottom: var(--space-sm);
+}
+
+.loc-details__subheading {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-navy);
+  margin-top: var(--space-md);
+  margin-bottom: var(--space-sm);
+}
+
+.loc-details__features {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.loc-details__features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  font-size: 1rem;
+  color: var(--color-text-body);
+  line-height: 1.5;
+}
+
+.loc-details__features li svg {
+  flex-shrink: 0;
+  color: var(--color-cta);
+  margin-top: 2px;
+}
+
+.loc-details__getting-here p {
+  font-size: 0.9375rem;
+  color: var(--color-text-body);
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+}
+
+/* Sidebar Cards */
+.loc-details__sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.loc-sidebar-card {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-card);
+  border: 1px solid rgba(240, 98, 146, 0.12);
+}
+
+.loc-sidebar-card__heading {
+  font-family: var(--font-heading);
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--color-navy);
+  margin-bottom: var(--space-sm);
+}
+
+.loc-sidebar-card__hours {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-blue-deep);
+  margin-bottom: 0.25rem;
+}
+
+.loc-sidebar-card__note {
+  font-size: 0.875rem;
+  color: var(--color-text-light);
+}
+
+.loc-sidebar-card__map {
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: var(--space-sm);
+}
+
+.loc-sidebar-card__map iframe {
+  display: block;
+  border-radius: var(--radius);
+}
+
+.loc-sidebar-card__btn {
+  display: block;
+  text-align: center;
+  width: 100%;
+}
+
+.loc-sidebar-card--cta {
+  background: linear-gradient(135deg, var(--color-blue-pale) 0%, var(--color-pink-pale) 100%);
+  border-color: transparent;
+}
+
+.loc-sidebar-card__promo {
+  font-size: 1rem;
+  color: var(--color-text-body);
+  line-height: 1.6;
+  margin-bottom: var(--space-sm);
+}
+
+/* Other Locations */
+.loc-others {
+  background: var(--color-grey-light);
+  padding: var(--space-lg) 0;
+}
+
+.loc-others__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+}
+
+.loc-others__card {
+  display: block;
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  text-decoration: none;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.loc-others__card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+  color: inherit;
+}
+
+.loc-others__card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.loc-others__info {
+  padding: 1.25rem 1.5rem;
+}
+
+.loc-others__info h3 {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-navy);
+  margin-bottom: 0.25rem;
+}
+
+.loc-others__info p {
+  font-size: 0.9375rem;
+  color: var(--color-text-light);
+}
+
+@media (min-width: 600px) {
+  .loc-others__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .loc-details__grid {
+    grid-template-columns: 1fr 360px;
+  }
+
+  .loc-details .section-heading--left {
+    text-align: left;
+  }
+
+  .loc-details .section-heading--left::after {
+    left: 0;
+    transform: none;
+  }
+}
+
+/* ===========================
+   18. SCROLL ANIMATIONS
    =========================== */
 .animate-on-scroll {
   opacity: 0;
