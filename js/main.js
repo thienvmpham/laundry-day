@@ -117,50 +117,6 @@
     createRoamingBubble(specialSection, true);
   }
 
-  // --- Contact Form AJAX Submission ---
-  var contactForm = document.getElementById('contact-form');
-  if (contactForm) {
-    contactForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-
-      var submitBtn = document.getElementById('contact-submit');
-      var successMsg = document.getElementById('contact-success');
-      var errorMsg = document.getElementById('contact-error');
-
-      // Reset status messages
-      successMsg.classList.remove('is-active');
-      errorMsg.classList.remove('is-active');
-
-      // Loading state
-      var originalText = submitBtn.textContent;
-      submitBtn.textContent = 'Sending...';
-      submitBtn.disabled = true;
-
-      var formData = new FormData(contactForm);
-
-      fetch(contactForm.action, {
-        method: 'POST',
-        body: formData,
-        headers: { 'Accept': 'application/json' }
-      })
-      .then(function (response) {
-        if (response.ok) {
-          successMsg.classList.add('is-active');
-          contactForm.reset();
-        } else {
-          errorMsg.classList.add('is-active');
-        }
-      })
-      .catch(function () {
-        errorMsg.classList.add('is-active');
-      })
-      .finally(function () {
-        submitBtn.textContent = originalText;
-        submitBtn.disabled = false;
-      });
-    });
-  }
-
   // --- Scroll-triggered Animations ---
   var animatedElements = document.querySelectorAll('.animate-on-scroll');
 
