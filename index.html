@@ -9,21 +9,153 @@
   <!-- Open Graph -->
   <meta property="og:title" content="Laundry Day — Your Laundry, Done Effortlessly">
   <meta property="og:description" content="Free detergent, zero card fees, giant washers. 3 Melbourne locations coming soon.">
-  <meta property="og:image" content="assets/images/brand_lockup_transparent.png">
+  <meta property="og:image" content="https://laundryday.au/assets/images/brand_lockup_transparent.png">
+  <meta property="og:url" content="https://laundryday.au/">
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Laundry Day">
+  <meta property="og:locale" content="en_AU">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Laundry Day — Your Laundry, Done Effortlessly">
+  <meta name="twitter:description" content="Free detergent, zero card fees, giant washers. 3 Melbourne locations coming soon.">
+  <meta name="twitter:image" content="https://laundryday.au/assets/images/brand_lockup_transparent.png">
+
+  <link rel="canonical" href="https://laundryday.au/">
 
   <title>Laundry Day — Melbourne's Friendliest Laundromat</title>
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="assets/favicon.png">
-  <link rel="apple-touch-icon" href="assets/favicon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+
+  <!-- Preload critical resources -->
+  <link rel="preload" href="assets/images/hero_interior.jpeg" as="image">
+  <link rel="dns-prefetch" href="https://www.google.com">
+  <link rel="dns-prefetch" href="https://maps.googleapis.com">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&family=Pacifico&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="css/styles.css?v=3">
+  <link rel="stylesheet" href="css/styles.css?v=5">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Laundry Day",
+    "url": "https://laundryday.au",
+    "logo": "https://laundryday.au/assets/images/brand_lockup_transparent.png",
+    "description": "Melbourne's friendliest laundromat. Free detergent, zero card fees, giant 27KG washers.",
+    "email": "hello@laundryday.au",
+    "sameAs": [
+      "https://instagram.com/laundrydaymelb",
+      "https://facebook.com/laundrydaymelb",
+      "https://tiktok.com/@laundrydaymelb"
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "Laundromat",
+      "name": "Laundry Day — Brunswick East",
+      "url": "https://laundryday.au/#locations",
+      "image": "https://laundryday.au/assets/images/site1_brunswick.jpeg",
+      "email": "hello@laundryday.au",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "220 Lygon Street",
+        "addressLocality": "Brunswick East",
+        "addressRegion": "VIC",
+        "postalCode": "3057",
+        "addressCountry": "AU"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -37.7716,
+        "longitude": 144.9720
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+        "opens": "06:00",
+        "closes": "22:00"
+      },
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Laundry Day"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Laundromat",
+      "name": "Laundry Day — St Albans",
+      "url": "https://laundryday.au/#locations",
+      "image": "https://laundryday.au/assets/images/site2_stalbans.jpeg",
+      "email": "hello@laundryday.au",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "4/329 Main Road East",
+        "addressLocality": "St Albans",
+        "addressRegion": "VIC",
+        "postalCode": "3021",
+        "addressCountry": "AU"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -37.7431,
+        "longitude": 144.8100
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+        "opens": "06:00",
+        "closes": "22:00"
+      },
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Laundry Day"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Laundromat",
+      "name": "Laundry Day — Maribyrnong",
+      "url": "https://laundryday.au/#locations",
+      "image": "https://laundryday.au/assets/images/site3_maribyrnong.jpeg",
+      "email": "hello@laundryday.au",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "103 Rosamond Road",
+        "addressLocality": "Maribyrnong",
+        "addressRegion": "VIC",
+        "postalCode": "3032",
+        "addressCountry": "AU"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -37.7802,
+        "longitude": 144.8844
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+        "opens": "06:00",
+        "closes": "22:00"
+      },
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Laundry Day"
+      }
+    }
+  ]
+  </script>
 </head>
 
 <body>
