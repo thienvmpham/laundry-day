@@ -1088,7 +1088,121 @@ h1, h2, h3, h4 {
 }
 
 /* ===========================
-   15. FOOTER
+   15. CONTACT FORM
+   =========================== */
+.contact {
+  background: linear-gradient(135deg, var(--color-blue-pale) 0%, var(--color-pink-pale) 100%);
+  padding: var(--space-xl) 0;
+  text-align: center;
+}
+
+.contact__form {
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.contact__fields {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+.contact__field--full {
+  grid-column: 1 / -1;
+}
+
+.contact__label {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-navy);
+  margin-bottom: 0.375rem;
+}
+
+.contact__input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--color-text);
+  background: var(--color-white);
+  border: 2px solid rgba(21, 101, 192, 0.15);
+  border-radius: var(--radius);
+  transition: border-color var(--transition), box-shadow var(--transition);
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.contact__input::placeholder {
+  color: var(--color-grey-medium);
+}
+
+.contact__input:focus {
+  outline: none;
+  border-color: var(--color-blue-sky);
+  box-shadow: 0 0 0 4px rgba(79, 195, 247, 0.15);
+}
+
+.contact__select {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%231565C0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 2.5rem;
+}
+
+.contact__textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.contact__submit {
+  display: block;
+  width: 100%;
+  margin-bottom: var(--space-sm);
+}
+
+.contact__status {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1rem;
+  border-radius: var(--radius);
+  font-weight: 500;
+  font-size: 0.9375rem;
+}
+
+.contact__status.is-active {
+  display: flex;
+}
+
+.contact__status--success {
+  background: #E8F5E9;
+  color: #2E7D32;
+}
+
+.contact__status--error {
+  background: #FFEBEE;
+  color: #C62828;
+}
+
+@media (min-width: 600px) {
+  .contact__fields {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .contact__submit {
+    width: auto;
+    margin: 0 auto var(--space-sm);
+  }
+}
+
+/* ===========================
+   16. FOOTER
    =========================== */
 .site-footer {
   background: var(--color-navy);
