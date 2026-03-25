@@ -66,7 +66,7 @@
     el.className = 'bubble' + (isDark ? ' bubble--dark' : '');
     var size = 8 + Math.random() * 50;
     var anim = animations[Math.floor(Math.random() * animations.length)];
-    var duration = 5 + Math.random() * 9;
+    var duration = 10 + Math.random() * 12;
     var delay = Math.random() * 10;
     var opacity = 0.25 + Math.random() * 0.55;
     el.style.cssText =
