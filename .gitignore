@@ -9,3 +9,8 @@ implementation_plans/
 
 # Preview screenshots
 preview.png
+
+# Temporary files
+.tmp/
+.DS_Store
+.playwright-mcp/
